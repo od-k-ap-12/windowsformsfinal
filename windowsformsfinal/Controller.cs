@@ -12,8 +12,10 @@ namespace windowsformsfinal
 {
     internal class Controller
     {
-        MainLocation MainLocation { get; set; }
-        Menu Menu { get; set; }
+        public Object SchoolTeacher { get; set; }
+        public Chest Chest { get; set; }
+        public MainLocation MainLocation { get; set; }
+        public Menu Menu { get; set; }
         public Character Player { get; set; }
         public double ClientSizeWidth { get; set; }
         public double ClientSizeHeight { get; set; }
@@ -24,13 +26,15 @@ namespace windowsformsfinal
             this.ClientSizeHeight = ClientSizeHeight;
             this.ClientSizeWidth = ClientSizeWidth;
         }
-        public void TimerEvent(object sender, EventArgs e, PictureBox[] pbs)
+        public void TimerEvent(object sender, EventArgs e, PictureBox[] pbs, Form1 form)
         {
             foreach(PictureBox pictureBox in pbs)
             {
-                if (pictureBox.Bounds.IntersectsWith(Player.SpriteContainer.Bounds)&&pictureBox.Tag=="NPC")
+                if (pictureBox.Bounds.IntersectsWith(Player.SpriteContainer.Bounds)&&pictureBox==SchoolTeacher.Sprite)
                 {
-                  Player.LocationX = pictureBox.Left - Player.SpriteContainer.Width;
+                    DialogueCall(form, SchoolTeacher);
+                  Player.LocationX = pictureBox.Left - Player.SpriteContainer.Width-100;
+
                 }
             }
                 if (Player.MoveLeft && Player.LocationX > 0)
@@ -79,11 +83,36 @@ namespace windowsformsfinal
             Player.SpriteContainer.Image = Image.FromFile(Player.Sprites[Player.Steps]);
 
         }
-        public void SetUp(Form1 form)
+        public void TitleScreen(Form1 form)
         {
-            MainLocation = new MainLocation(Player,null, form.pictureBox2);
-            MainLocation.LoadMainLocation(form);
+            Menu = new Menu(new Button[] {form.button1,form.button2 });
+            form.BackgroundImage = Image.FromFile("titlescreen.png");
+            Menu.LoadMenu();
+            MainLocation = new MainLocation(Player,null, form.pictureBox2, form.pictureBox4);
+            SchoolTeacher = new Object(form.pictureBox2, new List<string> { "Where's your key?"});
 
+        }
+        public void DialogueCall(Form1 form,Object obj)
+        {
+            form.DialogueBox.Visible = true;
+            form.label1.Text = obj.NextLineCall();
+            form.label1.Visible = true;
+        }
+        public void LoadMainLocation(Form1 form)
+        {
+            Menu.HideMenu();
+            MainLocation.LoadMainLocation(form);
+            Chest = new Chest(form.pictureBox3);
+            Image chest = Image.FromFile("chest.png");
+            Chest.ChestMods.Add(chest);
+        }
+        public void ShowChest()
+        {
+            Chest.ShowChest();
+        }
+        public void HideChest()
+        {
+            Chest.HideChest();
         }
     }
 }

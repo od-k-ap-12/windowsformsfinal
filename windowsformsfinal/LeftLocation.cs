@@ -8,5 +8,6 @@ namespace windowsformsfinal
 {
     internal class LeftLocation
     {
+
     }
 }

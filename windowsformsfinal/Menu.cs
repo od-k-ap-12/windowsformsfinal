@@ -10,17 +10,22 @@ namespace windowsformsfinal
     internal class Menu
     {
         Button[] MenuOptions;
-        PictureBox Background;
-        public Menu(Button[] menuOptions, PictureBox background)
+        public Menu(Button[] menuOptions)
         {
             MenuOptions = menuOptions;
-            Background = background;
         }
         public void LoadMenu()
         {
             foreach (var option in MenuOptions)
             {
                 option.Visible = true;
+            }
+        }
+        public void HideMenu()
+        {
+            foreach (var option in MenuOptions)
+            {
+                option.Visible = false;
             }
         }
     }

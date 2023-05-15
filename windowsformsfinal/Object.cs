@@ -18,23 +18,18 @@ namespace windowsformsfinal
         {
             this.Sprite = Sprite;
             this.Description = Description;
-            CurrentLine = -1;
+            CurrentLine = 0;
         }
-        public string NextLineCall(PictureBox DialogueWindow)
+        public string NextLineCall()
         {
             if (CurrentLine != Description.Count)
             {
-                CurrentLine++;
                 return Description[CurrentLine];
                 
             }
             else
             {
-                return "end";
-                /*pictureBox4.Visible = false;
-                pictureBox3.Visible = false;
-                label1.Visible = false;
-                FirstRiddleCall();*/
+                return "";
             }
         }
 

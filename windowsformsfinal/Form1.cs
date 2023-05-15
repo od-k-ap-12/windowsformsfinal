@@ -18,7 +18,7 @@ namespace windowsformsfinal
         {
             InitializeComponent();
             controller = new Controller(ClientSize.Width, ClientSize.Height,pictureBox1);
-            controller.SetUp(this);
+            controller.TitleScreen(this);
 
         }
 
@@ -39,17 +39,47 @@ namespace windowsformsfinal
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            controller.TimerEvent(sender,e, this.Controls.OfType<PictureBox>().ToArray());
+            controller.TimerEvent(sender,e, this.Controls.OfType<PictureBox>().ToArray(),this);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            controller.LoadMainLocation(this);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Close();
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            controller.ShowChest();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            controller.HideChest();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            controller.ShowChest();
+        }
+
+        private void DialogueBox_Click(object sender, EventArgs e)
+        {
+            if (controller.SchoolTeacher.NextLineCall() == "")
+            {
+                DialogueBox.Visible = false;
+                label1.Visible = false;
+                controller.SchoolTeacher.CurrentLine=0;
+            }
+            else
+            {
+                label1.Text = controller.SchoolTeacher.NextLineCall();
+                controller.SchoolTeacher.CurrentLine++;
+            }
         }
     }
 }
