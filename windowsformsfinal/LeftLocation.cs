@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace windowsformsfinal
 {
-    internal class Scene
+    internal class LeftLocation
     {
     }
 }
