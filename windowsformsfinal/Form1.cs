@@ -21,12 +21,6 @@ namespace windowsformsfinal
             controller.TitleScreen(this);
 
         }
-
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             controller.Player.MoveKeyDown(sender, e);

@@ -43,7 +43,7 @@ namespace windowsformsfinal
                     Player.SpriteContainer.Location = new Point(Player.LocationX, Player.LocationY);
                     PlayAnimation(4, 7);
                 }
-                else if (Player.MoveRight && Player.LocationX + Player.Width < ClientSizeWidth)
+                else if (Player.MoveRight && Player.LocationX  < ClientSizeWidth)
                 {
                     Player.LocationX += Player.Speed;
                     Player.SpriteContainer.Location = new Point(Player.LocationX, Player.LocationY);
@@ -55,7 +55,7 @@ namespace windowsformsfinal
                     Player.SpriteContainer.Location = new Point(Player.LocationX, Player.LocationY);
                     PlayAnimation(12, 15);
                 }
-                else if (Player.MoveDown && Player.LocationY + Player.Height < ClientSizeHeight)
+                else if (Player.MoveDown && Player.LocationY < ClientSizeHeight)
                 {
                     Player.LocationY += Player.Speed;
                     Player.SpriteContainer.Location = new Point(Player.LocationX, Player.LocationY);

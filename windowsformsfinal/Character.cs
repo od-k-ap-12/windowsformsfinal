@@ -19,8 +19,8 @@ namespace windowsformsfinal
         public bool MoveDown { get;set;}
         public int LocationX { get; set; }
         public int LocationY { get; set; }
-        public int Height { get; set; }
-        public int Width { get; set; }
+        //public int Height { get; set; }
+        //public int Width { get; set; }
         public int Speed { get; set; }
         public void MoveKeyDown(object sender, KeyEventArgs e)
         {
