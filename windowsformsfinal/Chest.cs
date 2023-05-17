@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace windowsformsfinal
 {
-    internal class Chest
+    public class Chest
     {
         public int CollectedGems { get; set; }
         public List<Image> ChestMods { get; set; }

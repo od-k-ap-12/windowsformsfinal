@@ -10,37 +10,41 @@ using System.Windows.Forms;
 
 namespace windowsformsfinal
 {
-    internal class MainLocation
+    public class MainLocation:Location
     {
-        public Character Player { get; set; }
-        public PictureBox School { get; set; }
-        public PictureBox NPC { get; set; }
-        public PictureBox ShowChest { get; set; }
-        public MainLocation(Character player,PictureBox school, PictureBox npc, PictureBox showchest)
+
+        public MainLocation(Form1 form):base(form,0,2,1,3,-1)
         {
-            Player = player;
-            School = school;
-            NPC = npc;
-            Player.LocationX = Player.SpriteContainer.Location.X;
-            Player.LocationY = Player.SpriteContainer.Location.Y;
-            Player.Sprites = Directory.GetFiles("player", "*.png").ToList();
-            Player.SpriteContainer.Image = Image.FromFile(Player.Sprites[Player.Steps]);
-            Player.Speed = 15;
-            Player.AnimationSpeed = 2;
-            ShowChest = showchest;
         }
-        public void LoadMainLocation(Form1 form)
+
+        public override void LoadLocation(Character Character)
         {
-            Player.SpriteContainer.Visible = true;
-            form.BackgroundImage = Image.FromFile("hydrangea.png");
-            //School.Visible = true;
-            NPC.Visible = true;
-            ShowChest.Visible = true;
+            
+            form.BackgroundImage = Image.FromFile("hydrangea2.png");
+            form.SchoolTeacher.Visible = true;
+            form.KeySprite.Visible = true;
+            form.BackToMenu.Visible = true;
+            form.label2.Visible = true;
+            form.label3.Visible = true;
+            if (PreviousLocation == 1)
+            {
+                Character.LocationX = form.LeftLocChange.Right + Character.SpriteContainer.Width + 50;
+            }
+            else if (PreviousLocation == 2)
+            {
+                Character.LocationX = form.RightLocChange.Left - Character.SpriteContainer.Width - 50;
+            }
+            else if (PreviousLocation == 3)
+            {
+                Character.LocationY = form.DownLocChange.Top - Character.SpriteContainer.Height - 50;
+            }
 
         }
-        public void HideMainLocation()
+        public override void HideLocation()
         {
-            NPC.Visible=false;
+            form.SchoolTeacher.Visible=false;
+            form.label2.Visible=false;
+            form.label3.Visible=false;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +9,7 @@ using System.Windows.Forms;
 
 namespace windowsformsfinal
 {
-    internal class Character
+    public class Character
     {
         public PictureBox SpriteContainer { get; set; }
         public List<string> Sprites = new List<string>();
@@ -19,9 +21,22 @@ namespace windowsformsfinal
         public bool MoveDown { get;set;}
         public int LocationX { get; set; }
         public int LocationY { get; set; }
-        //public int Height { get; set; }
-        //public int Width { get; set; }
         public int Speed { get; set; }
+        public Character(PictureBox spriteContainer,int animationSpeed,int speed)
+        {
+            SpriteContainer = spriteContainer;
+            AnimationSpeed = animationSpeed;
+            LocationX = SpriteContainer.Location.X;
+            LocationY = SpriteContainer.Location.Y;
+            Speed = speed;
+            Sprites = Directory.GetFiles("player", "*.png").ToList();
+            SpriteContainer.Image = Image.FromFile(Sprites[Steps]);
+        }
+
+        public void SpawnCharacter()
+        {
+            SpriteContainer.Visible = true;
+        }
         public void MoveKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)

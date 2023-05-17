@@ -17,8 +17,8 @@ namespace windowsformsfinal
         public Form1()
         {
             InitializeComponent();
-            controller = new Controller(ClientSize.Width, ClientSize.Height,pictureBox1);
-            controller.TitleScreen(this);
+            controller = new Controller(this);
+            controller.TitleScreen();
 
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -33,12 +33,12 @@ namespace windowsformsfinal
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            controller.TimerEvent(sender,e, this.Controls.OfType<PictureBox>().ToArray(),this);
+            controller.TimerEvent(sender,e, this.Controls.OfType<PictureBox>().ToArray());
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            controller.LoadMainLocation(this);
+            controller.LoadSpawnPoint();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,17 +63,13 @@ namespace windowsformsfinal
 
         private void DialogueBox_Click(object sender, EventArgs e)
         {
-            if (controller.SchoolTeacher.NextLineCall() == "")
-            {
-                DialogueBox.Visible = false;
-                label1.Visible = false;
-                controller.SchoolTeacher.CurrentLine=0;
-            }
-            else
-            {
-                label1.Text = controller.SchoolTeacher.NextLineCall();
-                controller.SchoolTeacher.CurrentLine++;
-            }
+            controller.DialogueBoxClick(sender,e);
+        }
+
+        private void BackToMenu_Click(object sender, EventArgs e)
+        {
+            controller.BackToMenu();
+            
         }
     }
 }
